@@ -1,0 +1,7 @@
+date,product,price,quantity
+2025-01-01,ProductA,120,10
+2025-01-02,ProductB,200,5
+2025-01-02,ProductA,150,8
+2025-01-03,ProductC,300,3
+2025-01-03,ProductB,250,6
+2025-01-04,ProductA,100,12

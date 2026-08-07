@@ -1,0 +1,31 @@
+# Configure this model to be materialized as a view
+# in development and a table in production/CI contexts
+
+models:
+  - name: bronze_customer
+    config:
+      materialized: "{{ 'view' if target.name == 'dev' else 'table' }}"
+  - name: bronze_store
+    columns:
+      - name: store_name
+        data_tests:
+          - store_name_prefix:
+              arguments:
+                prefix: MegaMart
+  - name: bronze_sales
+    columns:
+      - name: sales_id
+        data_tests:
+          - unique
+          - not_null
+      - name: store_sk
+        data_tests:
+          - unique:
+              config:
+                severity: warn
+          - not_null
+    data_tests:
+      - non_negative_values:
+          arguments:
+            gross_column: gross_amount
+            net_column: net_amount

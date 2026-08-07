@@ -1,0 +1,72 @@
+# ===========================================================================
+# NEVER COMMIT: agent logic, prompts, and runnable agent definitions.
+# These directories are kept OFF the repo intentionally. Do not force-add.
+# ===========================================================================
+skills/
+agents/
+
+# ===========================================================================
+# Python
+# ===========================================================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+*.egg
+build/
+dist/
+wheels/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.hypothesis/
+.coverage
+htmlcov/
+.coverage.*
+
+# ===========================================================================
+# Virtual environments — a single top-level .venv is created by `uv sync`.
+# ===========================================================================
+.venv/
+venv/
+env/
+ENV/
+
+# ===========================================================================
+# Secrets & local configuration — never commit anything in this block.
+# dbt profiles contain live warehouse credentials; only profiles.example.yml
+# (with env_var placeholders) may be committed.
+# ===========================================================================
+.env
+.env.*
+!.env.example
+**/profiles.yml
+**/profiles_bak.yml
+**/.user.yml
+*.pem
+*.key
+*.p12
+airflow.db
+fernet_key
+
+# ===========================================================================
+# Jupyter
+# ===========================================================================
+.ipynb_checkpoints/
+*_checkpoint.ipynb
+
+# ===========================================================================
+# dbt build artifacts
+# ===========================================================================
+target/
+dbt_packages/
+dbt_internal_packages/
+logs/
+dbt.log
+
+# ===========================================================================
+# Airflow runtime & log output
+# ===========================================================================
+tech_stack/airflow/logs/
+tech_stack/airflow/config/airflow.cfg.local
+tech_stack/airflow/airflow.db

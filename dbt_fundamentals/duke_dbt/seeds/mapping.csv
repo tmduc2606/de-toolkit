@@ -1,0 +1,11 @@
+id,customer_name,email,signup_date,is_active,account_balance,country,last_order_date
+1,Alice Johnson,alice@example.com,2024-01-15,true,1250.50,USA,2024-06-20
+2,Bob Smith,bob@example.com,2024-02-03,false,0.00,Canada,
+3,Charlie Brown,charlie@example.com,2024-03-12,true,89.99,UK,2024-05-01
+4,Diana Prince,diana@example.com,2024-04-18,true,9999.95,Australia,2024-06-30
+5,Ethan Lee,ethan@example.com,2024-05-22,false,-25.75,Singapore,
+6,Fatima Khan,fatima@example.com,2024-06-10,true,450.00,UAE,2024-06-25
+7,George Wilson,george@example.com,2024-07-01,true,10.10,USA,2024-07-04
+8,Hannah Davis,hannah@example.com,2024-07-15,false,,Germany,
+9,Ivan Petrov,ivan@example.com,2024-08-09,true,720.45,Poland,2024-09-01
+10,Julia Chen,julia@example.com,2024-09-30,true,150.00,Vietnam,2024-10-05

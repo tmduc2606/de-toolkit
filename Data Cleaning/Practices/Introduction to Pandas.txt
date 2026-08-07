@@ -1,0 +1,139 @@
+Introduction to Pandas
+
+I. Pandas Data Structures
+1) Create a DataFrame from List
+
+import pandas as pd
+
+# pandas.DataFrame(data=None, index=None, columns=None, dtype=None, copy=None)
+def createDataframe(student_data: List[List[int]]) -> pd.DataFrame:
+    return pd.DataFrame(student_data, columns = ["student_id", "age"])
+
+II. Data Inspection
+1) Get the Size of a DataFrame
+
+import pandas as pd
+# df.shape -> (x, y) | use list() to return
+def getDataframeSize(players: pd.DataFrame) -> List[int]:
+    return list(players.shape) 
+
+2) Display the First Three Rows
+
+import pandas as pd
+
+def selectFirstRows(employees: pd.DataFrame) -> pd.DataFrame:
+    return employees.head(n = 3)
+
+III. Data Selecting
+1) Select Data
+
+# df.loc[row_selector, column_selector]
+# df.iloc[index_row]
+
+def selectData(students: pd.DataFrame) -> pd.DataFrame:
+    return students.loc[students["student_id"] == 101, ["name", "age"]]
+
+2) Create a New Column
+
+def createBonusColumn(employees: pd.DataFrame) -> pd.DataFrame:
+    # Bonus = 2 * Base Salary
+    employees["bonus"] = employees["salary"] * 2
+    return employees
+
+III. Data Cleaning
+
+1) Drop Duplicate Rows
+# subset = [...] - drop on certain columns
+# drop_duplicates(subset=None, *, keep='first', inplace=False, ignore_index=False)
+
+import pandas as pd
+
+def dropDuplicateEmails(customers: pd.DataFrame) -> pd.DataFrame:
+    return customers.drop_duplicates(subset = ["email"])
+
+2) Drop Missing Data
+import pandas as pd
+
+# dropna(*, axis=0, how=<no_default>, thresh=<no_default>, subset=None, inplace=False, ignore_index=False)
+
+def dropMissingData(students: pd.DataFrame) -> pd.DataFrame:
+    return students.dropna(subset = ["name"])
+
+3) Modify Columns
+
+import pandas as pd
+
+def modifySalaryColumn(employees: pd.DataFrame) -> pd.DataFrame:
+    employees["salary"] = employees["salary"] * 2 # *= 2
+    return employees
+
+4) Rename Columns
+
+# DataFrame.rename(mapper=None, *, index=None, columns=None, axis=None, copy=<no_default>, inplace=False, level=None, errors='ignore')
+
+import pandas as pd
+
+def renameColumns(students: pd.DataFrame) -> pd.DataFrame:
+    return students.rename(columns = {
+        "id": "student_id",
+        "first": "first_name",
+        "last": "last_name",
+        "age": "age_in_years"
+    })
+
+5) Change Data Type
+
+# DataFrame.astype(dtype, copy=<no_default>, errors='raise')
+
+def changeDatatype(students: pd.DataFrame) -> pd.DataFrame:
+    students["grade"] = students["grade"].astype(int)
+    return students
+
+6) Fill Missing Data
+
+# DataFrame.fillna(value, *, axis=None, inplace=False, limit=None)
+
+def fillMissingValues(products: pd.DataFrame) -> pd.DataFrame:
+    products["quantity"] = products["quantity"].fillna(0)
+    return products
+
+IV. Table Reshaping
+
+1) Reshape Data: Concatenate
+
+# pandas.concat(objs, *, axis=0, join='outer', ignore_index=False, keys=None, levels=None, names=None, verify_integrity=False, sort=<no_default>, copy=<no_default>)
+
+def concatenateTables(df1: pd.DataFrame, df2: pd.DataFrame) -> pd.DataFrame:
+    return pd.concat([df1, df2])
+
+2) Reshape Data: Pivot
+
+# df.pivot(index="date", columns="variable", values="value")
+
+def pivotTable(weather: pd.DataFrame) -> pd.DataFrame:
+    return weather.pivot(index = "month", columns = "city", values = "temperature")
+
+3) Reshape Data: Melt
+
+# pandas.melt(frame, id_vars=None, value_vars=None, var_name=None, value_name='value', col_level=None, ignore_index=True)
+
+def meltTable(report: pd.DataFrame) -> pd.DataFrame:
+    return report.melt(
+        id_vars = "product", 
+        value_vars = ["quarter_1", "quarter_2", "quarter_3", "quarter_4"],
+        var_name = "quarter",
+        value_name = "sales"
+    )
+
+V. Advanced Techniques
+
+1) Method Chaining
+
+import pandas as pd
+
+# 1st chain: .loc[amimals["weight"] > 100] - filters out all animals less than 100kg
+# 2nd chain: .sort_values(by = "weight", ascending = Flase) - sort in ascending order
+# 3rd chain: [["name"]] → returns a DataFrame, ["name"] → returns a Series
+
+def findHeavyAnimals(animals: pd.DataFrame) -> pd.DataFrame:
+    return animals.loc[animals["weight"] > 100].sort_values(by = "weight", ascending = False)[["name"]]

@@ -1,0 +1,402 @@
+30 Days of Pandas
+
+I. Data Filtering
+
+595. Big Countries
+
+import pandas as pd
+
+def big_countries(world: pd.DataFrame) -> pd.DataFrame:
+    result = world[
+        (world["area"] >= 3000000) | 
+        (world["population"] >= 25000000)
+    ]
+    return result[["name", "population", "area"]]
+
+1757. Recyclable and Low Fat Products
+
+import pandas as pd
+
+def find_products(products: pd.DataFrame) -> pd.DataFrame:
+    return products[
+        (products["low_fats"] == 'Y') & 
+        (products["recyclable"] == 'Y')
+    ][["product_id"]]
+
+183. Customer Who Never Order
+
+import pandas as pd
+
+# pd.merge(left, right, how='inner', on=None, left_on=None, right_on=None, left_index=False, right_index=False, sort=False, suffixes=('_x', '_y'), copy=<no_default>, indicator=False, validate=None)
+
+def find_customers(customers: pd.DataFrame, orders: pd.DataFrame) -> pd.DataFrame:
+    # merge() = SQL-like JOINS with how = left, right, inner...
+    # left_on = fixed column to be joined
+    # right_on = column to join on the right side
+    result = pd.merge(
+        customers, 
+        orders, 
+        how = "left", 
+        left_on = "id", 
+        right_on = "customerId"
+    )
+
+    # Filter all rows with NaN values in Orders.customerId
+    result = result[pd.isna(result["customerId"])]
+
+    # Must use nested list <=> DataFrame (otherwise Series)
+    return result[["name"]].rename(columns = {"name": "Customers"})
+
+1148. Article Views I
+
+import pandas as pd
+
+# pd.drop_duplicates(subset=None, *, keep='first', inplace=False, ignore_index=False)
+
+# An author views their self-made articles (v.author_id = v.viewer_id)
+
+def article_views(views: pd.DataFrame) -> pd.DataFrame:
+    result = views[(views["author_id"] == views["viewer_id"])].drop_duplicates(subset = ["author_id", "viewer_id"]).sort_values(by = "author_id", ascending = True)
+
+    return result[["author_id"]].rename(columns = {"author_id": "id"})
+
+II. String Methods
+
+1683. Invalid Tweets
+
+# .str -> Convert the row to string
+# len() -> Count total characters
+
+def invalid_tweets(tweets: pd.DataFrame) -> pd.DataFrame:
+    
+    result = tweets[tweets["content"].str.len() > 15]
+    
+    return result[["tweet_id"]]
+
+1873. Calculate Special Bonus
+
+import pandas as pd
+
+# This method will not work -> Series-wise
+#     if (employees["employee_id"] % 2 != 0) & (employees["name"].str.startswith("M")):
+
+# Use indexing instead
+# loc[]
+# Syntax: DataFrame.loc 
+# Parameter : None 
+# Returns : Scalar, Series, DataFrame
+
+def calculate_special_bonus(employees: pd.DataFrame) -> pd.DataFrame:
+    
+    # By default, employee doesn't have any bonus
+    employees["bonus"] = 0
+
+    # ID % 2 != 0 and emp name does not start with "M"
+    mask = (employees["employee_id"] % 2 != 0) & (~employees["name"].str.startswith("M"))
+    
+    # Apply 100% bonus (salary) on conditional employees
+    employees.loc[mask, "bonus"] = employees.loc[mask, "salary"]
+    
+    return employees[["employee_id", "bonus"]].sort_values(by = "employee_id", ascending = True)
+    
+1667. Fix Names in a Table
+# lower() -> normalize characters, then capitalize() the first character of the word
+
+def fix_names(users: pd.DataFrame) -> pd.DataFrame:
+    users["name"] = users["name"].str.lower().str.capitalize()
+    return users.sort_values(by = "user_id", ascending = True)
+    
+1517. Find Users With Valid E-mails
+
+import pandas as pd
+
+# [A-Za-z]+ -> (One or more) The first letter must be a char
+# [A-Za-z0-9._-]* -> letters (upper, lower), digits, underscore, period and dash
+# fullmatch() -> entire match a regex
+
+def valid_emails(users: pd.DataFrame) -> pd.DataFrame:
+    pattern = r'[A-Za-z]+[A-Za-z0-9._-]*@leetcode\.com'
+    return users[users["mail"].str.fullmatch(pattern)]
+
+1527. Patients With a Condition
+# (^|.*\s) - ^ matches the start of the string,
+# . = any character
+# * = zero or more character
+# \s = a whitespace character (space, tab, newline)
+# Sum in: matches everything up to a space
+
+def find_patients(patients: pd.DataFrame) -> pd.DataFrame:
+    return patients[patients["conditions"].str.match(r"(^|.*\s)DIAB1", na = False)]
+
+III. Data Manipulation
+
+177. Nth Highest Salary
+import pandas as pd
+
+def nth_highest_salary(employee: pd.DataFrame, N: int) -> pd.DataFrame:
+
+    # Return result of second, third, ... largest salaries
+    result = employee.drop_duplicates(subset = ["salary"]).nlargest(N, "salary")
+
+    # N invalid -> null or,
+    # If the result is less than distinct salaries, not enough
+    # for leaderboard -> null
+    if (N <= 0) or (len(result) < N):
+        return pd.DataFrame({f"getNthHighestSalary({N})": [None]})
+
+    # Return the result of the last row (least top)
+    return result[["salary"]].iloc[[-1]].rename(columns = {"salary": f"getNthHighestSalary({N})"})
+
+176. Second Highest Salary
+
+import pandas as pd
+
+def second_highest_salary(employee: pd.DataFrame) -> pd.DataFrame:
+    
+    # If the leaderboard is singular
+    if len(pd.unique(employee["salary"])) <= 1:
+        return pd.DataFrame({"SecondHighestSalary": [None]})
+
+    # drop_duplicates() -> the leaderboard may contain duplicated values on salary
+    # .nlargest(2, "salary") -> return the second, third, ... highest salaries
+    # [["salary"]].iloc[[-1]] -> return the non-highest leaderboard, then select the last row
+    # .rename(columns = {"salary": "SecondHighestSalary"}) -> rename the column to SecondHighestSalary
+    return employee.drop_duplicates(subset = ["salary"]).nlargest(2, "salary")[["salary"]].iloc[[-1]].rename(columns = {"salary": "SecondHighestSalary"})
+
+184. Department Highest Salary
+
+import pandas as pd
+
+# df.rank(axis=0, method='average', numeric_only=False, na_option='keep', ascending=True, pct=False)
+
+def department_highest_salary(employee: pd.DataFrame, department: pd.DataFrame) -> pd.DataFrame:
+    
+    # Rename the columns for neat return
+    employee = employee.rename(columns = {"name": "Employee", "salary": "Salary"})
+    department = department.rename(columns = {"name": "Department"})
+
+    # SQL-like JOIN on department ID
+    merged = pd.merge(employee, department, left_on = "departmentId", right_on = "id")
+
+    # RANK() OVER (PARTITION BY departmentId ORDER BY Salary DESC)
+    merged["rank"] = merged.groupby("departmentId")["Salary"].rank(method = "min", ascending = False)
+
+    # LIMIT 1
+    result = merged[merged["rank"] == 1]
+
+    # Return respective columns
+    return result[["Department", "Employee", "Salary"]]
+
+178. Rank Scores
+
+import pandas as pd
+
+# Rank: 1 1 3 4 4 6
+# Dense Rank: 1 1 2 3 3 4
+
+def order_scores(scores: pd.DataFrame) -> pd.DataFrame:
+    scores["rank"] = scores[["score"]].rank(method = "dense", ascending = False)
+
+    return scores[["score", "rank"]].sort_values(by = "score", ascending = False)
+
+196. Delete Duplicate Emails
+
+import pandas as pd
+
+# inplace = True -> directly modify the dataframe without storing via a variable
+
+# Remember, smallest ID -> it's safe to sort the IDs in ascending order
+
+def delete_duplicate_emails(person: pd.DataFrame) -> None:
+    person.sort_values(by = "id", ascending = True, inplace = True)
+    person.drop_duplicates(subset = ["email"], keep = "first", inplace = True)
+
+1795. Rearrange Products Table
+
+import pandas as pd
+
+# pd.melt(frame, id_vars=None, value_vars=None, var_name=None, value_name='value', col_level=None, ignore_index=True)
+
+def rearrange_products_table(products: pd.DataFrame) -> pd.DataFrame:
+    return pd.melt(products, id_vars = "product_id", value_vars = ["store1", "store2", "store3"], var_name = "store", value_name = "price").dropna(subset = ["price"])
+
+IV. Statistics
+
+1907. Count Salary Categories
+
+import pandas as pd
+
+# df.apply(func, axis=0, raw=False, result_type=None, args=(), by_row='compat', engine=None, engine_kwargs=None, **kwargs) -> apply to either column-wise or row-wise
+
+def count_salary_categories(accounts: pd.DataFrame) -> pd.DataFrame:
+    
+    # Classify function
+    def classify(income):
+        if income < 20000:
+            return "Low Salary"
+        if (income >= 20000) and (income <= 50000):
+            return "Average Salary"
+        return "High Salary"
+    
+    # Apply to the cateogry feature
+    accounts["category"] = accounts["income"].apply(classify)
+
+    # Count the total number of cateogry
+    counts = accounts.groupby("category").size()
+
+    # Construct the dataframe with intial category
+    result = pd.DataFrame({"category": ["Low Salary", "Average Salary", "High Salary"]}).sort_values("category", ascending = True)
+
+    # Map the counts with the category
+    result["accounts_count"] = result["category"].map(counts).fillna(0) # .astype(int) for safer casting
+
+    return result
+
+V. Data Aggregation
+
+1741. Find Total Time Spent by Each Employee
+
+import pandas as pd
+
+# pd.groupby(by=None, level=None, *, as_index=True, sort=True, group_keys=True, observed=True, dropna=True)
+
+# as_index - Return object with group labels as the index. Only relevant for DataFrame input. as_index=False is effectively “SQL-style” grouped output.
+
+def total_time(employees: pd.DataFrame) -> pd.DataFrame:
+
+    # Time spent in the office for a single entry
+    employees["total_time"] = employees["out_time"] - employees["in_time"]
+
+    # Group by event_day, emp_id
+    result = employees.groupby(["event_day", "emp_id"], as_index = False)["total_time"].sum()
+
+    return result.rename(columns = {"event_day": "day"}) 
+
+511. Game Play Analysis I
+
+import pandas as pd
+
+# Group by player_id to find the first login (regardless of device_id and games_played)
+# as_index = False -> avoid the column being grouped turns into index
+
+def game_analysis(activity: pd.DataFrame) -> pd.DataFrame:
+    result = activity.groupby("player_id", as_index = False)["event_date"].min()
+
+    return result.rename(columns = {"event_date": "first_login"})
+
+586. Customer Placing the Largest Number of Orders
+
+import pandas as pd
+
+def largest_orders(orders: pd.DataFrame) -> pd.DataFrame:
+    result = orders.groupby("customer_number")["order_number"].size().reset_index(name = "no_orders")
+    return result.nlargest(1, "no_orders")[["customer_number"]]
+
+1693. Daily Leads and Partners
+
+import pandas as pd
+
+# df.nunique(axis=0, dropna=True) -> Count number of distinct elements in specified axis.
+
+# df.reset_index(level=None, *, drop=False, inplace=False, col_level=0, col_fill='', allow_duplicates=<no_default>, names=None) -> Reset the index of the DataFrame, and use the default one instead. If the DataFrame has a MultiIndex, this method can remove one or more levels.
+
+def daily_leads_and_partners(daily_sales: pd.DataFrame) -> pd.DataFrame:
+    result = daily_sales.groupby(["date_id", "make_name"])[["lead_id", "partner_id"]].nunique().reset_index().rename(columns = {"lead_id":"unique_leads", "partner_id":"unique_partners"})
+
+    return result
+
+1484. Group Sold Products By The Date
+import pandas as pd
+
+def categorize_products(activities: pd.DataFrame) -> pd.DataFrame:
+
+    # Ordered by sell_date
+    activities = activities.sort_values(by = "sell_date", ascending = True)
+
+    results = activities.groupby("sell_date")["product"].nunique().reset_index(name = "num_sold")
+
+    counts = activities.groupby("sell_date")["product"].agg(lambda x: ",".join(sorted(x.unique()))).reset_index(name = "products")
+
+    return results.merge(counts, on = "sell_date")
+
+# Alternative: results = activities.sort_values(by = "sell_date", ascending = True).groupby("sell_date").agg(
+    # num_sold=("product", "size"),
+    # products=("product", lambda x: ", ".join(sorted(x.unique())))
+# ).reset_index()
+
+596. Classes With at Least 5 Students
+
+import pandas as pd
+
+def find_classes(courses: pd.DataFrame) -> pd.DataFrame:
+    result = courses.groupby("class")["student"].size().reset_index(name = "no_students")
+
+    return result[result["no_students"] >= 5][["class"]]
+
+2356. Number of Unique Subjects Taught by Each Teacher
+
+import pandas as pd
+
+def count_unique_subjects(teacher: pd.DataFrame) -> pd.DataFrame:
+    result = teacher.groupby("teacher_id")["subject_id"].nunique().reset_index(name = "cnt")
+
+    return result[["teacher_id", "cnt"]]
+
+Data Integration
+
+607. Sales Person
+
+import pandas as pd
+
+def sales_person(sales_person: pd.DataFrame, company: pd.DataFrame, orders: pd.DataFrame) -> pd.DataFrame:
+
+    # Return all sales_id whose order belongs to "RED" company
+    sales = orders.merge(company, on = "com_id").loc[lambda df: df["name"].isin(["RED"]), "sales_id"]
+
+    # Filters those who don't have orders from RED company (negate)
+    return sales_person[~sales_person["sales_id"].isin(sales)][["name"]]
+
+570. Managers with at Least 5 Direct Reports
+
+import pandas as pd
+
+def find_managers(employee: pd.DataFrame) -> pd.DataFrame:
+    result = employee.groupby("managerId")["id"].size().reset_index(name = "count")
+    
+    # Join the result (>= 5 direct reports) with the origin (equivalent to self-join SQL)
+    return result[result["count"] >= 5].merge(employee, left_on = "managerId", right_on = "id")[["name"]]
+
+1050. Actors and Directors Who Cooperated At Least Three Times
+
+import pandas as pd
+
+def actors_and_directors(actor_director: pd.DataFrame) -> pd.DataFrame:
+    result = actor_director.groupby(["actor_id", "director_id"])["timestamp"].size().reset_index(name = "no_acts")
+    return result[["actor_id", "director_id"]].loc[result["no_acts"] >= 3]
+
+1378. Replace Employee ID With The Unique Identifier
+
+import pandas as pd
+
+# Use left-join to make the unique_id also appear the null values
+
+def replace_employee_id(employees: pd.DataFrame, employee_uni: pd.DataFrame) -> pd.DataFrame:
+    return employees.merge(employee_uni, on = "id", how = "left")[["unique_id", "name"]]
+
+1280. Students & Examinations
+
+import pandas as pd
+
+def students_and_examinations(students: pd.DataFrame, subjects: pd.DataFrame, examinations: pd.DataFrame) -> pd.DataFrame:
+
+    # A default table where all students learn 3 subjects
+    table = students.merge(subjects, how = "cross")
+
+    # Count of attended exams in examinations table
+    result = examinations.groupby(["student_id", "subject_name"]).size().reset_index(name = "attended_exams")
+
+    # Merge the default table with the result (left-join) -> fill null values with 0 -> rearrange the columns
+    # Order by student_id, subject_name
+    return table.merge(result, on = ["student_id", "subject_name"], how = "left").fillna({"attended_exams": 0})[["student_id", "student_name", "subject_name", "attended_exams"]].sort_values(by = ["student_id", "subject_name"], ascending = True)
+
+
