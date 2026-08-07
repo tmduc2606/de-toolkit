@@ -1,0 +1,8 @@
+repos:
+  - repo: local
+    hooks:
+      - id: de-toolkit-gate
+        name: de-toolkit submission gate
+        entry: uv run python scripts/validate_submissions.py
+        language: system
+        files: ^(practice|src|scripts|tests)/.*\.(py|sql|md|csv|json|yml|toml)$

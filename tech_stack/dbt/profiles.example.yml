@@ -1,0 +1,19 @@
+duke_dbt:
+  outputs:
+    dev:
+      catalog: workspace
+      host: <YOUR_DATABRICKS_HOST>.cloud.databricks.com
+      http_path: /sql/1.0/warehouses/<YOUR_WAREHOUSE_ID>
+      schema: dev
+      threads: 1
+      token: "{{ env_var('DATABRICKS_TOKEN') }}"
+      type: databricks
+    prod:
+      catalog: dbt_prod
+      host: <YOUR_DATABRICKS_HOST>.cloud.databricks.com
+      http_path: /sql/1.0/warehouses/<YOUR_WAREHOUSE_ID>
+      schema: source
+      threads: 1
+      token: "{{ env_var('DATABRICKS_TOKEN') }}"
+      type: databricks
+  target: dev

@@ -7,7 +7,7 @@ This repository transforms solved Leetcode problems into a structured Data Engin
 ### Setup
 
 ```bash
-pip install pytest
+uv sync
 ```
 
 ### Running Tests
@@ -15,14 +15,14 @@ pip install pytest
 Run all tests:
 
 ```bash
-pytest -v
+uv run pytest -v
 ```
 
-Run tests for a specific concept:
+Run tests for a specific concept (from the repo root):
 
 ```bash
-pytest test_hash_set.py -v
-pytest test_hash_map.py -v
+uv run pytest practice/dsa_de/hash_set -v
+uv run pytest practice/dsa_de/hash_map -v
 ```
 
 ### Collecting Tests
