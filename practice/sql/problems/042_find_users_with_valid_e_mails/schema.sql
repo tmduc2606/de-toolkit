@@ -1,0 +1,6 @@
+-- schema.sql for SQL042 — Find Users With Valid E-Mails
+-- Fill in the LeetCode example test case:
+--   1. CREATE TABLE ... for every table referenced by solution.sql
+--   2. INSERT the example rows (the same rows LeetCode annotates)
+-- The test below switches from "skip" to real verification as soon as this
+-- file contains an INSERT statement.

@@ -24,6 +24,13 @@ RESULTS: list[tuple[str, str]] = []
 DSA_FILE_RE = re.compile(r"^\d{3}_[a-z0-9_]+_[a-z0-9_]+\.py$")
 SQL_DIR_RE = re.compile(r"^\d{3}_[a-z0-9_]+$")
 FORBIDDEN = {"__pycache__", ".pytest_cache", ".ipynb_checkpoints", ".ruff_cache", "target", "dbt_packages", "logs", ".venv"}
+# Transient caches pytest itself recreates on every run. They are blocked for
+# git (check 1, so never committed); the concept-level dir check only hard-fails
+# on persistent build/job artifacts.
+TRANSIENT = {"__pycache__", ".pytest_cache", ".ruff_cache"}
+# Files that legitimately contain the literal secret regexes (the tool itself
+# and the doc that defines the rule set) are skipped by the secret scan.
+SELF_REFERENCING = {"scripts/validate_submissions.py", "docs/REFACTORING_BLUEPRINT.md"}
 SECRET_RES = [
     re.compile(r"dapi[0-9a-f]{32,}"),
     re.compile(r"gh[pousr]_[A-Za-z0-9]{30,}"),
@@ -41,7 +48,7 @@ def check(label: str, ok: bool) -> None:
 
 
 def git(*args: str) -> subprocess.CompletedProcess:
-    return subprocess.run(["git", *args], cwd=ROOT, capture_output=True, text=True)
+    return subprocess.run(["git", *args], cwd=ROOT, capture_output=True, text=True, check=False)
 
 
 def scan_text(text: str) -> list[str]:
@@ -73,6 +80,8 @@ def main() -> int:
     for concept in dsa_concepts:
         if concept.name == "_template":
             continue
+        if concept.name in FORBIDDEN:
+            continue
         files = {f.name for f in concept.iterdir() if f.is_file()}
         has_solution = any(DSA_FILE_RE.match(f) for f in files)
         if not (concept / "README.md").exists():
@@ -82,7 +91,7 @@ def main() -> int:
             dsa_bad.append(f"{concept.name}: no DSA solution file matching {DSA_FILE_RE.pattern}")
             dsa_ok = False
         for entry in concept.iterdir():
-            if entry.is_dir() and entry.name in FORBIDDEN:
+            if entry.is_dir() and entry.name in FORBIDDEN and entry.name not in TRANSIENT:
                 dsa_bad.append(f"{concept.name}: forbidden dir {entry.name}")
                 dsa_ok = False
     check(f"dsa layout: {len(dsa_concepts)} concepts clean", dsa_ok and not dsa_bad)
@@ -112,7 +121,7 @@ def main() -> int:
     # 4) Pytest collection (fast, no execution)
     collect = subprocess.run(
         ["uv", "run", "python", "-m", "pytest", "practice/dsa_de", "practice/sql/problems", "--collect-only", "-q"],
-        cwd=ROOT, capture_output=True, text=True,
+        cwd=ROOT, capture_output=True, text=True, check=False,
     )
     check(f"pytest collect (exit {collect.returncode})", collect.returncode == 0)
     if collect.returncode != 0:
@@ -123,6 +132,8 @@ def main() -> int:
     hits: list[str] = []
     for rel in tracked:
         path = ROOT / rel
+        if rel in SELF_REFERENCING:
+            continue
         if path.name == "uv.lock" or "/uv.lock" in rel:
             continue
         try:

@@ -100,13 +100,17 @@ def slugify(title: str) -> str:
 
 def parse_problems() -> list[dict]:
     text = RAW.read_text(encoding="utf-8-sig")
-    blocks = re.split(r"(?m)^SQL(\d+)\s*-\s*.+?$", text)
-    # blocks[0] is the preamble; then pairs of (num, body)
+    # Header form is "SQL1 - Title"; some entries (SQL43-46) omit the dash.
+    blocks = re.split(r"(?m)^SQL(\d+)\s*[-–—]?\s*(.+?)\s*$", text)
+    # blocks[0] is the preamble; then triples of (num, title, body)
     problems: list[dict] = []
-    for i in range(1, len(blocks), 2):
+    for i in range(1, len(blocks), 3):
+        if i + 2 >= len(blocks):
+            break
         num = int(blocks[i])
-        body = blocks[i + 1].strip("\n")
-        problems.append({"num": num, "body": body})
+        title = blocks[i + 1].strip()
+        body = blocks[i + 2].strip("\n")
+        problems.append({"num": num, "title": title, "body": body})
     return problems
 
 
@@ -131,20 +135,14 @@ def main() -> int:
     OUT.mkdir(parents=True, exist_ok=True)
     for p in problems:
         num = p["num"]
-        body_lines = p["body"].splitlines()
-        title = ""
-        first = body_lines[0].strip() if body_lines else ""
-        m = re.match(r"SQL\d+\s*-\s*(.+)", first)
-        if m:
-            title = m.group(1).strip()
-            body = "\n".join(body_lines[1:])
-        else:
-            body = p["body"]
+        title = p["title"]
+        body = p["body"]
         sql, annotations = split_body(body)
-        if not title:
-            title = f"problem {num}"
         folder = OUT / f"{num:03d}_{slugify(title)}"
         folder.mkdir(parents=True, exist_ok=True)
+        # pytest needs a package marker so every folder's test_solution.py is
+        # imported as <folder>.test_solution instead of colliding at root
+        (folder / "__init__.py").touch(exist_ok=True)
 
         (folder / "solution.sql").write_text(
             sql + "\n", encoding="utf-8"

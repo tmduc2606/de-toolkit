@@ -1,0 +1,6 @@
+-- schema.sql for SQL038 — Patients With a Condition
+-- Fill in the LeetCode example test case:
+--   1. CREATE TABLE ... for every table referenced by solution.sql
+--   2. INSERT the example rows (the same rows LeetCode annotates)
+-- The test below switches from "skip" to real verification as soon as this
+-- file contains an INSERT statement.

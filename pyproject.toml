@@ -36,4 +36,7 @@ package = true
 
 [tool.pytest.ini_options]
 testpaths = ["tests", "practice/dsa_de", "practice/sql/problems"]
-addopts = "-q"
+addopts = "-q --import-mode=importlib"
+# --import-mode=importlib: each SQL problem folder is digit-prefixed (001_*,
+# 002_*, ...) so it cannot be a Python package; importing by file path isolates
+# every same-named test_solution.py instead of colliding by basename.

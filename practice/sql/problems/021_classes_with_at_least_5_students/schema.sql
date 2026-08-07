@@ -1,0 +1,6 @@
+-- schema.sql for SQL021 — Classes With at Least 5 Students
+-- Fill in the LeetCode example test case:
+--   1. CREATE TABLE ... for every table referenced by solution.sql
+--   2. INSERT the example rows (the same rows LeetCode annotates)
+-- The test below switches from "skip" to real verification as soon as this
+-- file contains an INSERT statement.
