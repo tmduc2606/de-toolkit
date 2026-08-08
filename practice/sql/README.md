@@ -39,4 +39,6 @@ against the expected rows — no MySQL server needed.
 
 The 50 extracted problems carry working `solution.sql` files; `schema.sql` /
 `test_solution.py` test data population is tracked per-problem in each
-`problem.md` status checklist.
+`problem.md` status checklist. Problems 051–060 are hand-solved beyond the
+SQL 50 (LeetCode 175–1587 series) with fully populated schemas and DuckDB
+tests asserting the annotated output.
