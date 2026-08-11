@@ -41,4 +41,8 @@ The 50 extracted problems carry working `solution.sql` files; `schema.sql` /
 `test_solution.py` test data population is tracked per-problem in each
 `problem.md` status checklist. Problems 051–060 are hand-solved beyond the
 SQL 50 (LeetCode 175–1587 series) with fully populated schemas and DuckDB
-tests asserting the annotated output.
+tests asserting the annotated output. Problems 061–067 continue the series
+(LeetCode 1084–3497: Sales Analysis III, Market Analysis I, The Latest Login
+in 2020, Odd and Even Transactions, DNA Pattern Recognition, Analyze
+Subscription Conversion, Find Products with Valid Serial Numbers) with the
+same fully verified four-file layout.
