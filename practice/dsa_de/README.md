@@ -37,6 +37,7 @@ pytest --collect-only
 
 ```
 dsa-de-practice/
+├── digit-math/
 ├── grouping/
 ├── hash-map/
 ├── hash-set/
