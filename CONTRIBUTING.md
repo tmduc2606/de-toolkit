@@ -4,7 +4,7 @@
 
 1. Create `practice/dsa_de/<concept>/` (or reuse an existing concept).
 2. Copy `practice/dsa_de/_template/` into it.
-3. Implement per §8.1 of the blueprint (`docs/REFACTORING_BLUEPRINT.md`): LeetCode number + slug + DE frame in the filename; docstring naming the original LeetCode problem and the DE use case; one row added to the concept README problem table.
+3. Implement per the conformance contract (`docs/OVERHAUL_BLUEPRINT.md`): LeetCode number + slug + DE frame in the filename; docstring naming the original LeetCode problem and the DE use case; one row added to the concept README problem table.
 4. Add ≥ 1 sample file to `data/` and ≥ 3 pytest cases (normal / edge / empty).
 5. Verify: `uv run pytest practice/dsa_de/<concept> -v` then `uv run python scripts/validate_submissions.py`.
 

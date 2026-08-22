@@ -1,4 +1,4 @@
-"""Commit gate for hand-solved problems (docs/REFACTORING_BLUEPRINT.md §8.2).
+"""Commit gate for hand-solved problems (docs/OVERHAUL_BLUEPRINT.md §5).
 
 Usage:
     uv run python scripts/validate_submissions.py            # layout, ignore+secret guard, pytest collect
@@ -21,16 +21,19 @@ SQL_DIR = ROOT / "practice" / "sql" / "problems"
 
 RESULTS: list[tuple[str, str]] = []
 
-DSA_FILE_RE = re.compile(r"^\d{3}_[a-z0-9_]+_[a-z0-9_]+\.py$")
-SQL_DIR_RE = re.compile(r"^\d{3}_[a-z0-9_]+$")
+# Two independent numbering schemes (docs/OVERHAUL_BLUEPRINT.md §3):
+#   - dsa_de solution filenames encode the LeetCode number (>= 3 digits)
+#   - sql problem folders use a running catalog counter, not the LC number
+DSA_FILE_RE = re.compile(r"^\d{3,}_[a-z0-9_]+_[a-z0-9_]+\.py$")
+SQL_DIR_RE = re.compile(r"^\d{3,}_[a-z0-9_]+$")
 FORBIDDEN = {"__pycache__", ".pytest_cache", ".ipynb_checkpoints", ".ruff_cache", "target", "dbt_packages", "logs", ".venv"}
 # Transient caches pytest itself recreates on every run. They are blocked for
 # git (check 1, so never committed); the concept-level dir check only hard-fails
 # on persistent build/job artifacts.
 TRANSIENT = {"__pycache__", ".pytest_cache", ".ruff_cache"}
-# Files that legitimately contain the literal secret regexes (the tool itself
-# and the doc that defines the rule set) are skipped by the secret scan.
-SELF_REFERENCING = {"scripts/validate_submissions.py", "docs/REFACTORING_BLUEPRINT.md"}
+# Files that legitimately contain the literal secret regexes (the gate tool
+# itself) are skipped by the secret scan.
+SELF_REFERENCING = {"scripts/validate_submissions.py"}
 SECRET_RES = [
     re.compile(r"dapi[0-9a-f]{32,}"),
     re.compile(r"gh[pousr]_[A-Za-z0-9]{30,}"),

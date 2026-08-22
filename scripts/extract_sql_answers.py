@@ -9,7 +9,7 @@ Output: practice/sql/problems/<NNN>_<slug>/ with problem.md, solution.sql,
         DuckDB-verified test when the schema is populated).
 
 Re-running never destroys a hand-written schema: an existing schema.sql is
-kept and only reported. See docs/REFACTORING_BLUEPRINT.md §6.3.
+kept and only reported. See docs/OVERHAUL_BLUEPRINT.md.
 """
 from __future__ import annotations
 

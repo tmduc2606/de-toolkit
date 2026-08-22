@@ -53,6 +53,6 @@ Run `uv sync --group airflow --group dbt --group spark` once for the full toolch
 
 ## Documentation
 
-- `docs/REFACTORING_BLUEPRINT.md` — the full refactoring blueprint, transformation principles, and commit gate design.
+- `docs/OVERHAUL_BLUEPRINT.md` — the tracked contract: conventions, conformance rules, overhaul phases, and commit gate design.
 - `CONTRIBUTING.md` — how to add hand-solved DSA/SQL problems.
 - `AGENTS.md` — rules for AI-assisted work in this repo.

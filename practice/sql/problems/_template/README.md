@@ -2,7 +2,7 @@
 
 Copy this folder (minus this README) to `practice/sql/problems/<NNN>_<slug>/`
 to scaffold a new hand-solved SQL problem. See
-`docs/REFACTORING_BLUEPRINT.md` §8.1 for the conformance contract.
+`docs/OVERHAUL_BLUEPRINT.md` §4 for the conformance contract.
 
 1. `problem.md`     — the LeetCode prompt plus its test-case annotations.
 2. `schema.sql`     — `CREATE TABLE` + `INSERT` of the LeetCode example rows.
