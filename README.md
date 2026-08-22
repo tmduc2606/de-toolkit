@@ -70,7 +70,7 @@ de-toolkit/
 ├── src/detoolkit/        # shared helpers: DuckDB runner, Spark factory
 ├── scripts/              # extract_sql_answers · verify_toolchain · validate_submissions
 ├── docs/
-│   └── OVERHAUL_BLUEPRINT.md   # tracked contract: conventions + conformance rules
+│   └── originals/        # source material — planning documents are local-only
 ├── .github/workflows/    # ci.yml — pytest + submission gate on push/PR
 └── CONTRIBUTING.md       # how to add hand-solved problems (Flow A / Flow B)
 ```
@@ -101,7 +101,7 @@ uv run python scripts/validate_submissions.py --full    # full submission gate
 The gate verifies layout and naming conventions, scans tracked files for secrets,
 collects all tests, executes every populated SQL problem through DuckDB, and runs
 both practice modules end-to-end. CI runs the same checks on every push and PR.
-Conventions live in [`docs/OVERHAUL_BLUEPRINT.md`](docs/OVERHAUL_BLUEPRINT.md).
+Conventions live in [`CONTRIBUTING.md`](CONTRIBUTING.md).
 
 ## Contributing
 

@@ -1,4 +1,4 @@
-"""Commit gate for hand-solved problems (docs/OVERHAUL_BLUEPRINT.md §5).
+"""Commit gate for hand-solved problems (see CONTRIBUTING.md).
 
 Usage:
     uv run python scripts/validate_submissions.py            # layout, ignore+secret guard, pytest collect
@@ -21,7 +21,7 @@ SQL_DIR = ROOT / "practice" / "sql" / "problems"
 
 RESULTS: list[tuple[str, str]] = []
 
-# Two independent numbering schemes (docs/OVERHAUL_BLUEPRINT.md §3):
+# Two independent numbering schemes:
 #   - dsa_de solution filenames encode the LeetCode number (>= 3 digits)
 #   - sql problem folders use a running catalog counter, not the LC number
 DSA_FILE_RE = re.compile(r"^\d{3,}_[a-z0-9_]+_[a-z0-9_]+\.py$")

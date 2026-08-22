@@ -14,7 +14,7 @@
 
 ## Adding or editing practice problems
 
-1. Follow the conformance rules in `docs/OVERHAUL_BLUEPRINT.md` §4.
+1. Follow the conformance rules in `CONTRIBUTING.md`.
 2. Copy the relevant `_template/` scaffold first.
 3. After editing: `uv run pytest` for the affected module and `uv run python scripts/validate_submissions.py` — both must exit 0.
 4. Commit with a scoped message, e.g. `feat(practice/sql): add SQL01 Recyclable and Low Fat Products`.

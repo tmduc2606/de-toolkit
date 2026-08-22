@@ -3,7 +3,7 @@
 --   1. CREATE TABLE IF NOT EXISTS ... for every table in solution.sql
 --   2. INSERT the annotated example rows
 -- The DuckDB test below switches from "skip" to real verification as soon as
--- this file contains an INSERT statement (see docs/OVERHAUL_BLUEPRINT.md §4).
+-- this file contains an INSERT statement (see CONTRIBUTING.md, Flow B).
 
 CREATE TABLE IF NOT EXISTS example (
     id INTEGER PRIMARY KEY

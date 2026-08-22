@@ -1,6 +1,6 @@
 """DuckDB-free pytest suite for the digit-math concept.
 
-Normal / edge / empty cases per docs/OVERHAUL_BLUEPRINT.md §4 Flow A.
+Normal / edge / empty cases per CONTRIBUTING.md Flow A.
 """
 import csv
 import importlib

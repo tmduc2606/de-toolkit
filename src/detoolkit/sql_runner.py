@@ -1,4 +1,4 @@
-"""DuckDB runner used by all SQL problem tests (see docs/OVERHAUL_BLUEPRINT.md)."""
+"""DuckDB runner used by all SQL problem tests."""
 from __future__ import annotations
 
 from pathlib import Path

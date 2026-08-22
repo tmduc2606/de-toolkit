@@ -1,7 +1,7 @@
 # DSA → DE template
 
 Copy this folder as the scaffold for a new hand-solved DSA→DE problem.
-See `docs/OVERHAUL_BLUEPRINT.md` §4 for the conformance contract.
+See `CONTRIBUTING.md` (Flow A) for the conformance contract.
 
 Required edits after copying:
 
