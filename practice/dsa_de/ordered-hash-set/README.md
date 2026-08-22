@@ -30,5 +30,5 @@ The `data/` folder contains sample sorted data for DE-focused tests.
 ## How to run tests
 
 ```bash
-pytest test_ordered_hash_set.py -v
+uv run pytest practice/dsa_de/ordered-hash-set -v
 ```

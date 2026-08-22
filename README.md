@@ -66,7 +66,8 @@ de-toolkit/
 │   ├── airflow/          # dags/ + docker-compose.yaml learning playground
 │   ├── spark/            # spark tutorial notebook
 │   └── dbt/              # duke_dbt project (bronze/silver/gold)
-├── src/detoolkit/        # shared helpers: io, sql_runner, spark factory
+├── notebooks/            # polished cross-track cleaning collection
+├── src/detoolkit/        # shared helpers: DuckDB runner, Spark factory
 ├── scripts/              # extract_sql_answers · verify_toolchain · validate_submissions
 ├── docs/
 │   └── OVERHAUL_BLUEPRINT.md   # tracked contract: conventions + conformance rules

@@ -35,5 +35,5 @@ See `data/nested_json_sample.json` for sample nested JSON input (shared with `re
 ## How to run tests
 
 ```bash
-pytest test_tree_traversal.py -v
+uv run pytest practice/dsa_de/tree-traversal -v
 ```

@@ -30,5 +30,5 @@ See `data/frequency_sample.json` for sample frequency data.
 ## How to run tests
 
 ```bash
-pytest test_hash_map.py -v
+uv run pytest practice/dsa_de/hash-map -v
 ```

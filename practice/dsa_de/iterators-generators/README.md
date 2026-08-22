@@ -31,5 +31,5 @@ The `data/` folder is currently empty — add sample streaming data here.
 ## How to run tests
 
 ```bash
-pytest test_iterators_generators.py -v
+uv run pytest practice/dsa_de/iterators-generators -v
 ```

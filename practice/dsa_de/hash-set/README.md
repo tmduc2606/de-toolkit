@@ -28,5 +28,5 @@ See `data/orders_with_duplicates.csv` for sample input with duplicate order IDs.
 ## How to run tests
 
 ```bash
-pytest test_hash_set.py -v
+uv run pytest practice/dsa_de/hash-set -v
 ```

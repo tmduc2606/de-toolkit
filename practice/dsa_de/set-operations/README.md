@@ -29,5 +29,5 @@ The `data/` folder contains sample dataset pairs for DE-focused tests.
 ## How to run tests
 
 ```bash
-pytest test_set_operations.py -v
+uv run pytest practice/dsa_de/set-operations -v
 ```

@@ -34,5 +34,5 @@ The `data/` folder is currently empty — add sample frequency data here.
 ## How to run tests
 
 ```bash
-pytest test_heap.py -v
+uv run pytest practice/dsa_de/heap -v
 ```

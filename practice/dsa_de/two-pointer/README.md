@@ -33,5 +33,5 @@ The `data/` folder is currently empty — add sample sorted data here.
 ## How to run tests
 
 ```bash
-pytest test_two_pointer.py -v
+uv run pytest practice/dsa_de/two-pointer -v
 ```

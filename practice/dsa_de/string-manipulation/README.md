@@ -32,5 +32,5 @@ The `data/` folder is currently empty — add sample text data here.
 ## How to run tests
 
 ```bash
-pytest test_string_manipulation.py -v
+uv run pytest practice/dsa_de/string-manipulation -v
 ```

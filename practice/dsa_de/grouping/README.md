@@ -29,5 +29,5 @@ See `data/sample_logs.csv` for sample grouped log data.
 ## How to run tests
 
 ```bash
-pytest test_grouping.py -v
+uv run pytest practice/dsa_de/grouping -v
 ```

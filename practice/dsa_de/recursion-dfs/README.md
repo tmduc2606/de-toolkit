@@ -28,5 +28,5 @@ See `data/nested_json_sample.json` for sample nested JSON input.
 ## How to run tests
 
 ```bash
-pytest test_recursion_dfs.py -v
+uv run pytest practice/dsa_de/recursion-dfs -v
 ```
