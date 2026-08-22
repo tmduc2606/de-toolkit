@@ -24,10 +24,10 @@ set operations (intersection, difference) between datasets — all common data q
 
 ## Data Samples
 
-The `data/` folder is currently empty — add sample sequential ID data here.
+- `data/missing_ids.json` — sample sequential IDs with gaps for missing-record exercises.
 
 ## How to run tests
 
 ```bash
-pytest test_set_lookup_math.py -v
+uv run pytest practice/dsa_de/set-lookup-math -v
 ```

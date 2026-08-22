@@ -21,8 +21,8 @@ uv run pytest -v
 Run tests for a specific concept (from the repo root):
 
 ```bash
-uv run pytest practice/dsa_de/hash_set -v
-uv run pytest practice/dsa_de/hash_map -v
+uv run pytest practice/dsa_de/hash-set -v
+uv run pytest practice/dsa_de/hash-map -v
 ```
 
 ### Collecting Tests
@@ -36,7 +36,7 @@ pytest --collect-only
 ## Folder Structure
 
 ```
-dsa-de-practice/
+dsa_de/
 ├── digit-math/
 ├── grouping/
 ├── hash-map/

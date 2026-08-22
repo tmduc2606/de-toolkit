@@ -1,6 +1,7 @@
 # SQL Practice
 
-LeetCode SQL 50 study material, structured for automated, offline testing.
+Hand-solved LeetCode SQL drills — the original SQL 50 series plus an ongoing
+hand-solved extension — structured for automated, offline testing.
 
 ## Layout
 
