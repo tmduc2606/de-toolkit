@@ -73,6 +73,7 @@ tech_stack/airflow/airflow.db
 
 # ===========================================================================
 # Internal planning documents — kept local, never committed.
-# The tracked contract now lives in docs/OVERHAUL_BLUEPRINT.md.
+# Conformance rules live in CONTRIBUTING.md / AGENTS.md instead.
 # ===========================================================================
 docs/REFACTORING_BLUEPRINT.md
+docs/OVERHAUL_BLUEPRINT.md
