@@ -45,4 +45,6 @@ tests asserting the annotated output. Problems 061–067 continue the series
 (LeetCode 1084–3497: Sales Analysis III, Market Analysis I, The Latest Login
 in 2020, Odd and Even Transactions, DNA Pattern Recognition, Analyze
 Subscription Conversion, Find Products with Valid Serial Numbers) with the
-same fully verified four-file layout.
+same fully verified four-file layout. Problems 068–071 add LeetCode
+3570/3421/3521/3436 (library borrowing, exam improvement, co-purchase
+recommendation pairs, email validation) under the same contract.
