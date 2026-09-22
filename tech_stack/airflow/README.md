@@ -16,20 +16,24 @@ pip install -r tech_stack/airflow/requirements.txt   # mirrors the pyproject gro
 
 ## Run locally (Docker)
 
+One-time setup (from the repo root) — write a local `.env` (gitignored) with
+`AIRFLOW_UID` and a freshly generated Fernet key. Credentials never live in
+tracked files, and rewriting the file whole keeps the key from ever gluing onto
+a previous line:
+
+```powershell
+$key = uv run python -c "from cryptography.fernet import Fernet; print(Fernet.generate_key().decode())"
+Set-Content tech_stack/airflow/.env -Value "AIRFLOW_UID=50000`nFERNET_KEY=$key"
+```
+
+Then start the cluster:
+
 ```powershell
 cd tech_stack/airflow
-docker compose up           # copy .env.example -> .env first
+docker compose up
 ```
 
-Airflow UI: <http://localhost:8080> (admin / admin).
-
-Before the first `up`, generate a Fernet key into your local `.env`
-(credentials never live in tracked files):
-
-```powershell
-python -c "from cryptography.fernet import Fernet; print(Fernet.generate_key().decode())" |
-  Add-Content tech_stack/airflow/.env -Value "FERNET_KEY = $_"   # from repo root
-```
+Airflow UI: <http://localhost:8080> (airflow / airflow).
 
 ## Checking DAGs without a cluster
 
