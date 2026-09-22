@@ -1,0 +1,4 @@
+# Mirror of [dependency-groups].airflow in pyproject.toml.
+# uv is the primary installer (`uv sync --group airflow`); keep this file in
+# sync when bumping the group. Fallback: pip install -r requirements.txt
+apache-airflow>=3.2.1

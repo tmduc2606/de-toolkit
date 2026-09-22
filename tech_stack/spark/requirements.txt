@@ -1,0 +1,4 @@
+# Mirror of [dependency-groups].spark in pyproject.toml.
+# uv is the primary installer (`uv sync --group spark`); keep this file in
+# sync when bumping the group. Fallback: pip install -r requirements.txt
+pyspark>=4.0.1

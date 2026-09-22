@@ -2,8 +2,16 @@
 
 PySpark learning material (Spark Connect, DataFrames, SQL, streaming, ML).
 
-- `notebooks/spark_tutorial.ipynb` — 35-cell tutorial covering SparkSession setup, Spark Connect, DataFrames, SQL, streaming, and ML pipelines.
-- `data/sales_csv` — sample sales data.
+- `spark_tutorial.ipynb` — 35-cell tutorial covering SparkSession setup, Spark Connect, DataFrames, SQL, streaming, and ML pipelines.
+- `sales_csv` — sample sales data.
+
+## Dependencies
+
+Primary (repo-wide venv): `uv sync --group spark`. Plain-pip fallback:
+
+```powershell
+pip install -r tech_stack/spark/requirements.txt   # mirrors the pyproject group
+```
 
 ## Windows notes
 

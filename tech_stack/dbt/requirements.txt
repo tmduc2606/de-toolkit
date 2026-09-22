@@ -1,0 +1,6 @@
+# Mirror of [dependency-groups].dbt in pyproject.toml.
+# uv is the primary installer (`uv sync --group dbt`); keep this file in
+# sync when bumping the group. Fallback: pip install -r requirements.txt
+dbt-core>=1.11
+dbt-databricks>=1.12
+dbt-spark>=1.10

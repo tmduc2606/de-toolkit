@@ -14,6 +14,14 @@ $env:DATABRICKS_TOKEN = "<your token>"     # or set system-wide
 
 The profile references `{{ env_var('DATABRICKS_TOKEN') }}`; dbt reads it at runtime.
 
+## Dependencies
+
+Primary (repo-wide venv): `uv sync --group dbt`. Plain-pip fallback:
+
+```powershell
+pip install -r tech_stack/dbt/requirements.txt   # mirrors the pyproject group
+```
+
 ## Offline check (no warehouse connection)
 
 ```powershell
