@@ -23,6 +23,9 @@
   `data_cleaning/`, `dsa_de/`) — referenced by `AGENTS.md`; do not rename.
 - Code files are `snake_case` (`test_digit_math.py`); DSA concept folders are
   `kebab-case` (`digit-math/`).
+- File sizes: **no Git LFS** — study binaries (slides, notebooks) are committed
+  as regular files; each file must stay under GitHub's 100 MB hard limit, and
+  the repo total within a few hundred MB (owner budget: well below ~300 MB).
 
 ## Definition of done
 
