@@ -1,6 +1,6 @@
 # SQL 50 — Common Patterns for LeetCode Interviews
 
-> Converted from `docs/originals/SQL - Common Patterns.docx` (original preserved).
+> Converted from `docs/study-materials/data-engineering/SQL - Common Patterns.docx` (original preserved).
 > Problem IDs refer to `practice/sql/raw/sql_50_answersheet.txt` (SQL1..SQL50).
 
 ## Pattern Index
