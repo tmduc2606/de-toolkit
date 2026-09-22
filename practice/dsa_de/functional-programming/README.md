@@ -28,5 +28,5 @@ zero-quantity record used to exercise the filter branch).
 ## How to run tests
 
 ```bash
-uv run pytest practice/dsa_de/functional_programming -v
+uv run pytest practice/dsa_de/functional-programming -v
 ```
