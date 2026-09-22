@@ -8,6 +8,7 @@ import os
     uri = "/opt/airflow/logs/data/data_extract.txt",
     name = "fetch_data"
 )
+# Identity (name + uri) is referenced by 14_dependent_asset.py — keep them in sync.
 
 def fetch_data(self):
     # Ensure the directory exists

@@ -1,5 +1,3 @@
-from dag_orchestrator_1 import first_orchestrator_dag
-from dag_orchestrator_2 import second_orchestrator_dag
 from airflow.sdk import dag, task
 from airflow.operators.trigger_dagrun import TriggerDagRunOperator
 @dag
