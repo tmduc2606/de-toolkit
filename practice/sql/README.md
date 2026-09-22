@@ -49,3 +49,6 @@ Subscription Conversion, Find Products with Valid Serial Numbers) with the
 same fully verified four-file layout. Problems 068–071 add LeetCode
 3570/3421/3521/3436 (library borrowing, exam improvement, co-purchase
 recommendation pairs, email validation) under the same contract.
+Problem 072 adds LeetCode 3564 (Seasonal Sales Analysis: per-season category
+aggregation ranked by quantity, revenue, then lexicographic order) under the
+same contract.

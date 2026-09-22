@@ -7,7 +7,7 @@
 [![ci](https://github.com/tmduc2606/de-toolkit/actions/workflows/ci.yml/badge.svg)](https://github.com/tmduc2606/de-toolkit/actions/workflows/ci.yml)
 [![python](https://img.shields.io/badge/python-3.14-blue.svg)](.python-version)
 [![license](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
-[![sql drills](https://img.shields.io/badge/sql_drills-72-orange.svg)](practice/sql/problems)
+[![sql drills](https://img.shields.io/badge/sql_drills-73-orange.svg)](practice/sql/problems)
 
 </div>
 
@@ -61,7 +61,7 @@ Runnable counterparts pair with these topics under `practice/` and
 | Track | Where | What you practice | Scale | How to run |
 |---|---|---|---|---|
 | DSA → DE katas | `practice/dsa_de/<concept>/` | Classic algorithms reframed as DE tasks — hash lookups, grouping, two-pointer, digit math, … | 15 concepts | `uv run pytest practice/dsa_de -v` |
-| SQL drills | `practice/sql/problems/` | Joins, window functions, conditional aggregation, regex validation, … each solution DuckDB-tested | 72 problems | `uv run pytest practice/sql/problems -v` |
+| SQL drills | `practice/sql/problems/` | Joins, window functions, conditional aggregation, regex validation, … each solution DuckDB-tested | 73 problems | `uv run pytest practice/sql/problems -v` |
 | Data cleaning | `practice/data_cleaning/notebooks/` | Missing values, outliers, encoding, scaling in pandas | 10 notebooks | `uv run jupyter lab` |
 | Python computing | `practice/python-computing/` | Generators, iterators, regex, file I/O — Python fundamentals for DE | 6 notebooks | `uv run jupyter lab` |
 | Scalable & distributed computing | `practice/scalable-distributed-computing/` | OOP + from-scratch ML (regression, perceptron, neural net) | 5 notebooks | `uv run jupyter lab` |
@@ -83,7 +83,7 @@ de-toolkit/
 │   ├── sql/
 │   │   ├── patterns.md     # common SQL patterns study guide
 │   │   ├── raw/            # original SQL 50 answersheet (read-only provenance)
-│   │   └── problems/       # 72 drills: problem.md · schema.sql · solution.sql · test_solution.py
+│   │   └── problems/       # 73 drills: problem.md · schema.sql · solution.sql · test_solution.py
 │   ├── data_cleaning/      # notebooks/, practices/ — pandas wrangling chapters
 │   ├── python-computing/   # concept notebooks: generators, iterators, regex, I/O
 │   ├── scalable-distributed-computing/  # OOP & from-scratch ML notebooks
