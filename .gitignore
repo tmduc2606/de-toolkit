@@ -1,9 +1,12 @@
 # ===========================================================================
-# NEVER COMMIT: agent logic, prompts, and runnable agent definitions.
+# NEVER COMMIT: agent logic, prompts, runnable agent definitions, and agent
+# tool scaffolds (worktrees, session/manager state — Kilo, legacy .kilocode).
 # These directories are kept OFF the repo intentionally. Do not force-add.
 # ===========================================================================
 skills/
 agents/
+.kilo/
+.kilocode/
 
 # ===========================================================================
 # Python
