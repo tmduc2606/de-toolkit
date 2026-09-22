@@ -13,7 +13,9 @@ Notebooks + datasets covering the common data-cleaning operations:
 - `notebooks/09_feature_transformers` — Box-Cox, Yeo-Johnson.
 - `notebooks/10_ultimate_collection` — polished notebook covering all operations (Titanic dataset).
 - `practices/` — curated practice problem lists (Pandas/LeetCode style).
-- `datasets/` — shared datasets referenced across notebooks.
+
+> Datasets ship inside each chapter folder next to the notebook that uses them —
+> there is no shared `datasets/` directory.
 
 ## Run
 
