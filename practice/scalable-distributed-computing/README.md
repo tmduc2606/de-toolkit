@@ -11,11 +11,11 @@ behind scalable/distributed ML systems. Mirrors the theory under
 
 | Notebook | Topic |
 |---|---|
-| `Lecture 3 - OOP/Classes_OOP.ipynb` | Classes and OOP patterns |
-| `Lecture 3 - OOP/linear_regression.ipynb` | Linear regression from scratch |
-| `Lecture 3 - OOP/perceptron.ipynb` | Perceptron classifier |
-| `Lecture 3 - OOP/softmax_regression.ipynb` | Multiclass softmax regression |
-| `Lecture 3 - OOP/simple_neural_net.ipynb` | Minimal neural network |
+| `lecture-3-oop/Classes_OOP.ipynb` | Classes and OOP patterns |
+| `lecture-3-oop/linear_regression.ipynb` | Linear regression from scratch |
+| `lecture-3-oop/perceptron.ipynb` | Perceptron classifier |
+| `lecture-3-oop/softmax_regression.ipynb` | Multiclass softmax regression |
+| `lecture-3-oop/simple_neural_net.ipynb` | Minimal neural network |
 
 ## Run
 
