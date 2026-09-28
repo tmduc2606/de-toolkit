@@ -20,7 +20,7 @@
   `kebab-case` and paired across the theory/practice split — e.g.
   `docs/study-materials/big-data-analytics/` ↔ `practice/big-data-analytics/`.
 - Legacy top-level names stay `snake_case` (`practice/`, `tech_stack/`,
-  `data_cleaning/`, `dsa_de/`) — referenced by `AGENTS.md`; do not rename.
+  `data_cleaning/`, `dsa_de/`) — referenced by the local agent ruleset; do not rename.
 - Code files are `snake_case` (`test_digit_math.py`); DSA concept folders are
   `kebab-case` (`digit-math/`).
 - File sizes: **no Git LFS** — study binaries (slides, notebooks) are committed

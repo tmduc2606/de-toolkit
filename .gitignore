@@ -7,6 +7,7 @@ skills/
 agents/
 .kilo/
 .kilocode/
+AGENTS.md
 
 # ===========================================================================
 # Python
@@ -76,7 +77,7 @@ tech_stack/airflow/airflow.db
 
 # ===========================================================================
 # Internal planning documents — kept local, never committed.
-# Conformance rules live in CONTRIBUTING.md / AGENTS.md instead.
+# Conformance rules live in CONTRIBUTING.md instead.
 # ===========================================================================
 docs/REFACTORING_BLUEPRINT.md
 docs/OVERHAUL_BLUEPRINT.md
